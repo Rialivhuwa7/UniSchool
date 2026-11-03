@@ -1,0 +1,35 @@
+# Production: managed PostgreSQL (with automated backups), schema from Flyway.
+# Required environment variables:
+#   DB_URL       e.g. jdbc:postgresql://prod-db.example.com:5432/unischool?sslmode=require
+#   DB_USERNAME
+#   DB_PASSWORD
+#   UNISCHOOL_JWT_SECRET  (32+ characters, from a secrets manager)
+#   UNISCHOOL_ADMIN_USERNAME, UNISCHOOL_ADMIN_PASSWORD (12+ characters), UNISCHOOL_ADMIN_NAME
+#                         the first school office account, created on the first start against
+#                         the empty database. Remove them from the environment afterwards.
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 20
+  flyway:
+    # Never let a migration silently clean or reset production data.
+    clean-disabled: true
+    validate-on-migrate: true
+
+unischool:
+  seed-demo: false
+
+logging:
+  level:
+    root: INFO
+    org.hibernate.SQL: WARN
+
+# No public API docs in production. Generate the TypeScript types from dev or staging.
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false

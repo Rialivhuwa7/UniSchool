@@ -1,0 +1,16 @@
+{
+  "name": "unischool",
+  "private": true,
+  "description": "UniSchool front ends: shared API package, web app (and later the Expo mobile app)",
+  "workspaces": [
+    "packages/*",
+    "web"
+  ],
+  "scripts": {
+    "api:fetch": "npm run fetch --workspace @unischool/api",
+    "api:generate": "npm run generate --workspace @unischool/api",
+    "dev": "npm run dev --workspace web",
+    "build": "npm run build --workspace web",
+    "test": "npm run test --workspaces --if-present"
+  }
+}

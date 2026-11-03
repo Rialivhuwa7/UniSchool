@@ -1,0 +1,6952 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "UniSchool API",
+    "description": "UniSchool by Unicard: one app for everything school",
+    "version": "v1"
+  },
+  "security": [
+    {
+      "bearer-jwt": []
+    }
+  ],
+  "paths": {
+    "/api/tuckshop/learners/{learnerId}/orders": {
+      "put": {
+        "tags": [
+          "tuckshop-controller"
+        ],
+        "operationId": "place",
+        "parameters": [
+          {
+            "name": "learnerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlaceOrderRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreOrderView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/teacher/homework/{id}": {
+      "put": {
+        "tags": [
+          "homework-controller"
+        ],
+        "operationId": "resubmit",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/staff/notices/{id}": {
+      "put": {
+        "tags": [
+          "notice-controller"
+        ],
+        "operationId": "resubmit_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/uniform/stock/{id}": {
+      "put": {
+        "tags": [
+          "school-setup-controller"
+        ],
+        "operationId": "setStock",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuantityRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/school/lists/{campus}/{grade}": {
+      "get": {
+        "tags": [
+          "school-setup-controller"
+        ],
+        "operationId": "supplyList",
+        "parameters": [
+          {
+            "name": "campus",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PREP",
+                "COLLEGE",
+                "BOTH"
+              ]
+            }
+          },
+          {
+            "name": "grade",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SupplyListDetail"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "school-office-controller"
+        ],
+        "operationId": "saveList",
+        "parameters": [
+          {
+            "name": "campus",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PREP",
+                "COLLEGE",
+                "BOTH"
+              ]
+            }
+          },
+          {
+            "name": "grade",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PublishListRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/learners/{id}": {
+      "put": {
+        "tags": [
+          "school-setup-controller"
+        ],
+        "operationId": "update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLearnerRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnrolledLearner"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/groups/{id}/mode": {
+      "put": {
+        "tags": [
+          "school-office-controller"
+        ],
+        "operationId": "mode",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/GroupAdminView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/savings/monthly": {
+      "put": {
+        "tags": [
+          "savings-controller"
+        ],
+        "operationId": "monthly",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MonthlyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PotView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/principal/approvals/notices/{id}": {
+      "put": {
+        "tags": [
+          "principal-controller"
+        ],
+        "operationId": "editNotice",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/principal/approvals/homework/{id}": {
+      "put": {
+        "tags": [
+          "principal-controller"
+        ],
+        "operationId": "editHomework",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/homework/{id}/done": {
+      "put": {
+        "tags": [
+          "homework-controller"
+        ],
+        "operationId": "done",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DoneRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/HomeworkView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/groups/{id}/mute": {
+      "put": {
+        "tags": [
+          "group-controller"
+        ],
+        "operationId": "mute",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MuteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/GroupView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/fees/{learnerId}/plan": {
+      "put": {
+        "tags": [
+          "payments-controller"
+        ],
+        "operationId": "choosePlan",
+        "parameters": [
+          {
+            "name": "learnerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChoosePlanRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeeView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wallet/top-up": {
+      "post": {
+        "tags": [
+          "wallet-controller"
+        ],
+        "operationId": "topUp",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AmountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wallet/move/{learnerId}": {
+      "post": {
+        "tags": [
+          "wallet-controller"
+        ],
+        "operationId": "move",
+        "parameters": [
+          {
+            "name": "learnerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AmountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/teacher/homework": {
+      "get": {
+        "tags": [
+          "homework-controller"
+        ],
+        "operationId": "mine",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HomeworkStats"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "homework-controller"
+        ],
+        "operationId": "post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewHomeworkRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/teacher/class/{learnerId}/nudge": {
+      "post": {
+        "tags": [
+          "teacher-controller"
+        ],
+        "operationId": "nudge",
+        "parameters": [
+          {
+            "name": "learnerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/staff/notices": {
+      "get": {
+        "tags": [
+          "notice-controller"
+        ],
+        "operationId": "all",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NoticeStats"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "notice-controller"
+        ],
+        "operationId": "post_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewNoticeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/shop/preloved": {
+      "post": {
+        "tags": [
+          "shop-controller"
+        ],
+        "operationId": "sell",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SellRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatalogEntry"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/shop/checkout": {
+      "post": {
+        "tags": [
+          "shop-controller"
+        ],
+        "operationId": "checkout",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckoutRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/shop/cart": {
+      "get": {
+        "tags": [
+          "shop-controller"
+        ],
+        "operationId": "cart",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CartView"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "shop-controller"
+        ],
+        "operationId": "add",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddToCartRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CartView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/shop/cart/supply-list": {
+      "post": {
+        "tags": [
+          "shop-controller"
+        ],
+        "operationId": "addSupplyList",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddSupplyListRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CartView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/uniform/stock": {
+      "post": {
+        "tags": [
+          "school-setup-controller"
+        ],
+        "operationId": "addStock",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StockRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/school/uniform/stock/{id}/restock": {
+      "post": {
+        "tags": [
+          "school-office-controller"
+        ],
+        "operationId": "restock",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/uniform/items": {
+      "get": {
+        "tags": [
+          "school-setup-controller"
+        ],
+        "operationId": "uniformItems",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UniformItemView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "school-setup-controller"
+        ],
+        "operationId": "addUniformItem",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UniformItemRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UniformItemView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/sport": {
+      "get": {
+        "tags": [
+          "school-setup-controller"
+        ],
+        "operationId": "sportOffers",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SportOfferView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "school-setup-controller"
+        ],
+        "operationId": "addSportOffer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SportOfferRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SportOfferView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/learners": {
+      "get": {
+        "tags": [
+          "school-setup-controller"
+        ],
+        "operationId": "learners",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "campus",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PREP",
+                "COLLEGE",
+                "BOTH"
+              ]
+            }
+          },
+          {
+            "name": "grade",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EnrolledLearner"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "school-setup-controller"
+        ],
+        "operationId": "enrol",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnrolLearnerRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnrolledLearner"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/groups": {
+      "get": {
+        "tags": [
+          "school-office-controller"
+        ],
+        "operationId": "groups",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GroupAdminView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "school-setup-controller"
+        ],
+        "operationId": "createGroup",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewGroupRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/GroupAdminView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/groups/messages/{messageId}/hide": {
+      "post": {
+        "tags": [
+          "school-office-controller"
+        ],
+        "operationId": "hide",
+        "parameters": [
+          {
+            "name": "messageId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/school/fees/remind": {
+      "post": {
+        "tags": [
+          "school-office-controller"
+        ],
+        "operationId": "nudge_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/fees/load": {
+      "post": {
+        "tags": [
+          "school-setup-controller"
+        ],
+        "operationId": "loadFees",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoadFeesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/collections": {
+      "get": {
+        "tags": [
+          "school-office-controller"
+        ],
+        "operationId": "collections",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CollectionStats"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "school-office-controller"
+        ],
+        "operationId": "create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCollectionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionStats"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/collections/{id}/remind": {
+      "post": {
+        "tags": [
+          "school-office-controller"
+        ],
+        "operationId": "remind",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReminderResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/access/requests/{id}/decline": {
+      "post": {
+        "tags": [
+          "school-office-controller"
+        ],
+        "operationId": "decline",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/access/requests/{id}/approve": {
+      "post": {
+        "tags": [
+          "school-office-controller"
+        ],
+        "operationId": "approve",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TeacherAssignment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/savings/add": {
+      "post": {
+        "tags": [
+          "savings-controller"
+        ],
+        "operationId": "add_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AmountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PotView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/principal/approvals/notices/{id}/request-changes": {
+      "post": {
+        "tags": [
+          "principal-controller"
+        ],
+        "operationId": "noticeChanges",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestChanges"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/principal/approvals/notices/{id}/approve": {
+      "post": {
+        "tags": [
+          "principal-controller"
+        ],
+        "operationId": "approveNotice",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/principal/approvals/homework/{id}/request-changes": {
+      "post": {
+        "tags": [
+          "principal-controller"
+        ],
+        "operationId": "homeworkChanges",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestChanges"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/principal/approvals/homework/{id}/approve": {
+      "post": {
+        "tags": [
+          "principal-controller"
+        ],
+        "operationId": "approveHomework",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pos/pre-orders/{orderId}/handout": {
+      "post": {
+        "tags": [
+          "pos-controller"
+        ],
+        "operationId": "handout",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HandoutRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/HandoutResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pos/menu": {
+      "get": {
+        "tags": [
+          "menu-controller"
+        ],
+        "operationId": "all_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MenuItemAdminView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "menu-controller"
+        ],
+        "operationId": "add_2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MenuItemRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MenuItemAdminView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pos/charge": {
+      "post": {
+        "tags": [
+          "pos-controller"
+        ],
+        "operationId": "charge",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargeResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pocket-money": {
+      "get": {
+        "tags": [
+          "savings-controller"
+        ],
+        "operationId": "pocketMoney",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PocketMoneyView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "savings-controller"
+        ],
+        "operationId": "addPocketMoney",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PocketMoneyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PocketMoneyView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/payments/collections/{id}/pay": {
+      "post": {
+        "tags": [
+          "payments-controller"
+        ],
+        "operationId": "pay",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PayRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentReceipt"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/notices/{id}/rsvp": {
+      "post": {
+        "tags": [
+          "notice-controller"
+        ],
+        "operationId": "rsvp",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RsvpRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoticeView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/notices/{id}/read": {
+      "post": {
+        "tags": [
+          "notice-controller"
+        ],
+        "operationId": "read",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/notices/{id}/acknowledge": {
+      "post": {
+        "tags": [
+          "notice-controller"
+        ],
+        "operationId": "acknowledge",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AckRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoticeView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/notices/read-all": {
+      "post": {
+        "tags": [
+          "notice-controller"
+        ],
+        "operationId": "readAll",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/me/goal/save": {
+      "post": {
+        "tags": [
+          "learner-controller"
+        ],
+        "operationId": "saveTowardsGoal",
+        "parameters": [
+          {
+            "name": "amount",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/LearnerView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/learners/{id}/sign-in": {
+      "get": {
+        "tags": [
+          "learner-controller"
+        ],
+        "operationId": "signIn",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/LearnerSignIn"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "learner-controller"
+        ],
+        "operationId": "createSignIn",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LearnerSignInRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/LearnerSignIn"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/groups/{id}/messages": {
+      "get": {
+        "tags": [
+          "group-controller"
+        ],
+        "operationId": "messages",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MessageView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "group-controller"
+        ],
+        "operationId": "post_2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostMessageRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostMessageResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/groups/messages/{messageId}/report": {
+      "post": {
+        "tags": [
+          "group-controller"
+        ],
+        "operationId": "report",
+        "parameters": [
+          {
+            "name": "messageId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/give/{token}": {
+      "get": {
+        "tags": [
+          "savings-controller"
+        ],
+        "operationId": "givePage",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/GivePage"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "savings-controller"
+        ],
+        "operationId": "give",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GiveRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        }
+      }
+    },
+    "/api/auth/switch-role": {
+      "post": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "switchRole",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SwitchRoleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/register": {
+      "post": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "register",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegisterResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/uniform/items/{id}": {
+      "patch": {
+        "tags": [
+          "school-setup-controller"
+        ],
+        "operationId": "priceUniformItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PriceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UniformItemView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/sport/{id}": {
+      "patch": {
+        "tags": [
+          "school-setup-controller"
+        ],
+        "operationId": "priceSportOffer",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PriceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SportOfferView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/principal/settings": {
+      "get": {
+        "tags": [
+          "principal-controller"
+        ],
+        "operationId": "settings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SettingsView"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "principal-controller"
+        ],
+        "operationId": "updateSettings",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SettingsUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SettingsView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pos/menu/{id}": {
+      "patch": {
+        "tags": [
+          "menu-controller"
+        ],
+        "operationId": "update_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MenuItemUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MenuItemAdminView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pocket-money/{id}": {
+      "patch": {
+        "tags": [
+          "savings-controller"
+        ],
+        "operationId": "updatePocketMoney",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PocketMoneyUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PocketMoneyView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/learners/{id}/controls": {
+      "patch": {
+        "tags": [
+          "learner-controller"
+        ],
+        "operationId": "controls",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ControlsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/LearnerView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wallet": {
+      "get": {
+        "tags": [
+          "wallet-controller"
+        ],
+        "operationId": "wallet",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wallet/activity": {
+      "get": {
+        "tags": [
+          "wallet-controller"
+        ],
+        "operationId": "activity",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TxView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tuckshop/week": {
+      "get": {
+        "tags": [
+          "tuckshop-controller"
+        ],
+        "operationId": "week",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LearnerWeek"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tuckshop/menu": {
+      "get": {
+        "tags": [
+          "tuckshop-controller"
+        ],
+        "operationId": "menu",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MenuItemView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/teacher/class": {
+      "get": {
+        "tags": [
+          "teacher-controller"
+        ],
+        "operationId": "myClass",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClassView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/staff/notices/mine": {
+      "get": {
+        "tags": [
+          "notice-controller"
+        ],
+        "operationId": "mine_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NoticeStats"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/shop/supply-list": {
+      "get": {
+        "tags": [
+          "shop-controller"
+        ],
+        "operationId": "supplyList_1",
+        "parameters": [
+          {
+            "name": "learnerId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SupplyListView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/shop/orders": {
+      "get": {
+        "tags": [
+          "shop-controller"
+        ],
+        "operationId": "orders",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrderView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/shop/catalog": {
+      "get": {
+        "tags": [
+          "shop-controller"
+        ],
+        "operationId": "catalog",
+        "parameters": [
+          {
+            "name": "learnerId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "SUPPLY_LIST",
+                "UNIFORM",
+                "SPORT",
+                "PRELOVED",
+                "LABELS"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CatalogEntry"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/uniform": {
+      "get": {
+        "tags": [
+          "school-office-controller"
+        ],
+        "operationId": "uniform",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UniformView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/payouts": {
+      "get": {
+        "tags": [
+          "school-office-controller"
+        ],
+        "operationId": "payouts",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Payout"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/overview": {
+      "get": {
+        "tags": [
+          "school-office-controller"
+        ],
+        "operationId": "overview",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Overview"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/lists": {
+      "get": {
+        "tags": [
+          "school-office-controller"
+        ],
+        "operationId": "lists",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListStatus"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/groups/reported": {
+      "get": {
+        "tags": [
+          "school-office-controller"
+        ],
+        "operationId": "reported",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ReportedMessage"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/fees": {
+      "get": {
+        "tags": [
+          "school-office-controller"
+        ],
+        "operationId": "fees",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeePlanBreakdown"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/fees/schedule": {
+      "get": {
+        "tags": [
+          "school-setup-controller"
+        ],
+        "operationId": "feeSchedule",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeeSchedule"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/collections/export": {
+      "get": {
+        "tags": [
+          "school-office-controller"
+        ],
+        "operationId": "export",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/access/staff": {
+      "get": {
+        "tags": [
+          "school-office-controller"
+        ],
+        "operationId": "staff",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StaffView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/school/access/requests": {
+      "get": {
+        "tags": [
+          "school-office-controller"
+        ],
+        "operationId": "pending",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccessRequestView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/savings": {
+      "get": {
+        "tags": [
+          "savings-controller"
+        ],
+        "operationId": "pot",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PotView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/principal/dashboard": {
+      "get": {
+        "tags": [
+          "principal-controller"
+        ],
+        "operationId": "dashboard",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PrincipalDashboard"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/principal/approvals": {
+      "get": {
+        "tags": [
+          "principal-controller"
+        ],
+        "operationId": "approvals",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ApprovalItem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pos/today": {
+      "get": {
+        "tags": [
+          "pos-controller"
+        ],
+        "operationId": "today",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TillSummary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pos/learners": {
+      "get": {
+        "tags": [
+          "pos-controller"
+        ],
+        "operationId": "search",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TillLearnerView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pos/learners/{id}": {
+      "get": {
+        "tags": [
+          "pos-controller"
+        ],
+        "operationId": "learner",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TillLearnerView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pos/cards/{token}": {
+      "get": {
+        "tags": [
+          "pos-controller"
+        ],
+        "operationId": "byCard",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TillLearnerView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/payments/tickets": {
+      "get": {
+        "tags": [
+          "payments-controller"
+        ],
+        "operationId": "tickets",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TicketView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/payments/collections": {
+      "get": {
+        "tags": [
+          "payments-controller"
+        ],
+        "operationId": "collections_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CollectionForChild"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/notices": {
+      "get": {
+        "tags": [
+          "notice-controller"
+        ],
+        "operationId": "notices",
+        "parameters": [
+          {
+            "name": "learnerId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NoticeView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/me/headlines": {
+      "get": {
+        "tags": [
+          "notice-controller"
+        ],
+        "operationId": "headlines",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Headline"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/me/card": {
+      "get": {
+        "tags": [
+          "learner-controller"
+        ],
+        "operationId": "card",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CardView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/learners": {
+      "get": {
+        "tags": [
+          "learner-controller"
+        ],
+        "operationId": "mine_2",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LearnerView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/learners/{id}": {
+      "get": {
+        "tags": [
+          "learner-controller"
+        ],
+        "operationId": "get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/LearnerView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/learners/{id}/activity": {
+      "get": {
+        "tags": [
+          "learner-controller"
+        ],
+        "operationId": "activity_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TxView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/homework": {
+      "get": {
+        "tags": [
+          "homework-controller"
+        ],
+        "operationId": "list",
+        "parameters": [
+          {
+            "name": "learnerId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HomeworkView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/home": {
+      "get": {
+        "tags": [
+          "parent-home-controller"
+        ],
+        "operationId": "home",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParentHome"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/groups": {
+      "get": {
+        "tags": [
+          "group-controller"
+        ],
+        "operationId": "groups_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GroupView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/fees": {
+      "get": {
+        "tags": [
+          "payments-controller"
+        ],
+        "operationId": "fees_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FeeView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/me": {
+      "get": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "me",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MeResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tuckshop/learners/{learnerId}/orders/{day}": {
+      "delete": {
+        "tags": [
+          "tuckshop-controller"
+        ],
+        "operationId": "cancel",
+        "parameters": [
+          {
+            "name": "learnerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "day",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/shop/preloved/{id}": {
+      "delete": {
+        "tags": [
+          "shop-controller"
+        ],
+        "operationId": "unlist",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/shop/cart/{itemId}": {
+      "delete": {
+        "tags": [
+          "shop-controller"
+        ],
+        "operationId": "remove",
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CartView"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "OrderItem": {
+        "type": "object",
+        "properties": {
+          "menuItemId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32",
+            "maximum": 5,
+            "minimum": 1
+          }
+        },
+        "required": [
+          "menuItemId"
+        ]
+      },
+      "PlaceOrderRequest": {
+        "type": "object",
+        "properties": {
+          "day": {
+            "type": "string",
+            "format": "date"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem"
+            },
+            "minItems": 1
+          },
+          "payFrom": {
+            "type": "string",
+            "enum": [
+              "PARENT",
+              "LEARNER"
+            ]
+          },
+          "repeatWeekly": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "day",
+          "items"
+        ]
+      },
+      "LineView": {
+        "type": "object",
+        "properties": {
+          "index": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "unitPrice": {
+            "type": "number"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "collected": {
+            "type": "boolean"
+          },
+          "collectedAt": {
+            "type": "string"
+          }
+        }
+      },
+      "PreOrderView": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "learnerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "learnerName": {
+            "type": "string"
+          },
+          "day": {
+            "type": "string",
+            "format": "date"
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LineView"
+            }
+          },
+          "total": {
+            "type": "number"
+          },
+          "payFrom": {
+            "type": "string",
+            "enum": [
+              "PARENT",
+              "LEARNER"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "WAITING",
+              "PARTIAL",
+              "COLLECTED"
+            ]
+          },
+          "repeatWeekly": {
+            "type": "boolean"
+          }
+        }
+      },
+      "EditRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 140,
+            "minLength": 0
+          },
+          "body": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 0
+          }
+        },
+        "required": [
+          "body",
+          "title"
+        ]
+      },
+      "PostResult": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "CHANGES_REQUESTED",
+              "PUBLISHED"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "QuantityRequest": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "integer",
+            "format": "int32",
+            "maximum": 100000,
+            "minimum": 0
+          }
+        }
+      },
+      "ListItemRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32",
+            "maximum": 100,
+            "minimum": 1
+          },
+          "unitPrice": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "name",
+          "unitPrice"
+        ]
+      },
+      "PublishListRequest": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ListItemRequest"
+            },
+            "minItems": 1
+          },
+          "publish": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "items"
+        ]
+      },
+      "ListStatus": {
+        "type": "object",
+        "properties": {
+          "campus": {
+            "type": "string",
+            "enum": [
+              "PREP",
+              "COLLEGE",
+              "BOTH"
+            ]
+          },
+          "grade": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "ordersPlaced": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "UpdateLearnerRequest": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "maxLength": 60,
+            "minLength": 0
+          },
+          "lastName": {
+            "type": "string",
+            "maxLength": 60,
+            "minLength": 0
+          },
+          "grade": {
+            "type": "string",
+            "minLength": 1
+          },
+          "campus": {
+            "type": "string",
+            "enum": [
+              "PREP",
+              "COLLEGE",
+              "BOTH"
+            ]
+          },
+          "house": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 0
+          },
+          "sports": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "campus",
+          "firstName",
+          "grade",
+          "lastName"
+        ]
+      },
+      "EnrolledLearner": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "studentNumber": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "grade": {
+            "type": "string"
+          },
+          "campus": {
+            "type": "string",
+            "enum": [
+              "PREP",
+              "COLLEGE",
+              "BOTH"
+            ]
+          },
+          "house": {
+            "type": "string"
+          },
+          "sports": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "guardians": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasSignIn": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ModeRequest": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "OPEN",
+              "ANNOUNCE"
+            ]
+          }
+        },
+        "required": [
+          "mode"
+        ]
+      },
+      "GroupAdminView": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "campus": {
+            "type": "string",
+            "enum": [
+              "PREP",
+              "COLLEGE",
+              "BOTH"
+            ]
+          },
+          "members": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "moderator": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "OPEN",
+              "ANNOUNCE"
+            ]
+          },
+          "reportedMessages": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "MonthlyRequest": {
+        "type": "object",
+        "properties": {
+          "monthlyDebit": {
+            "type": "number",
+            "maximum": 20000,
+            "minimum": 100
+          }
+        },
+        "required": [
+          "monthlyDebit"
+        ]
+      },
+      "ContributionView": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "on": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "PotView": {
+        "type": "object",
+        "properties": {
+          "balance": {
+            "type": "number"
+          },
+          "goal": {
+            "type": "number"
+          },
+          "monthlyDebit": {
+            "type": "number"
+          },
+          "debitsBeforeOpening": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "projected": {
+            "type": "number"
+          },
+          "onTrack": {
+            "type": "boolean"
+          },
+          "shortBy": {
+            "type": "number"
+          },
+          "opensOn": {
+            "type": "string",
+            "format": "date"
+          },
+          "shareLink": {
+            "type": "string"
+          },
+          "contributions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContributionView"
+            }
+          }
+        }
+      },
+      "DoneRequest": {
+        "type": "object",
+        "properties": {
+          "learnerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "done": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "learnerId"
+        ]
+      },
+      "HomeworkView": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "learnerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "learnerName": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "attachment": {
+            "type": "string"
+          },
+          "by": {
+            "type": "string"
+          },
+          "done": {
+            "type": "boolean"
+          }
+        }
+      },
+      "MuteRequest": {
+        "type": "object",
+        "properties": {
+          "muted": {
+            "type": "boolean"
+          }
+        }
+      },
+      "GroupView": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "campus": {
+            "type": "string",
+            "enum": [
+              "PREP",
+              "COLLEGE",
+              "BOTH"
+            ]
+          },
+          "school": {
+            "type": "string"
+          },
+          "forChildren": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "members": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "moderator": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "OPEN",
+              "ANNOUNCE"
+            ]
+          },
+          "canPost": {
+            "type": "boolean"
+          },
+          "muted": {
+            "type": "boolean"
+          },
+          "unread": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "ChoosePlanRequest": {
+        "type": "object",
+        "properties": {
+          "plan": {
+            "type": "string",
+            "enum": [
+              "ANNUAL",
+              "TERMLY",
+              "MONTHLY_10",
+              "MONTHLY_12",
+              "FINANCED"
+            ]
+          }
+        },
+        "required": [
+          "plan"
+        ]
+      },
+      "FeeView": {
+        "type": "object",
+        "properties": {
+          "learnerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "learnerName": {
+            "type": "string"
+          },
+          "school": {
+            "type": "string"
+          },
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "annualFee": {
+            "type": "number"
+          },
+          "plan": {
+            "type": "string",
+            "enum": [
+              "ANNUAL",
+              "TERMLY",
+              "MONTHLY_10",
+              "MONTHLY_12",
+              "FINANCED"
+            ]
+          },
+          "planTitle": {
+            "type": "string"
+          },
+          "eachPayment": {
+            "type": "number"
+          },
+          "payments": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "firstPayment": {
+            "type": "string",
+            "format": "date"
+          },
+          "previousYearPaid": {
+            "type": "boolean"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanOption"
+            }
+          }
+        }
+      },
+      "PlanOption": {
+        "type": "object",
+        "properties": {
+          "plan": {
+            "type": "string",
+            "enum": [
+              "ANNUAL",
+              "TERMLY",
+              "MONTHLY_10",
+              "MONTHLY_12",
+              "FINANCED"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "payments": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "eachPayment": {
+            "type": "number"
+          },
+          "totalCost": {
+            "type": "number"
+          }
+        }
+      },
+      "AmountRequest": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "maximum": 50000,
+            "minimum": 1
+          }
+        },
+        "required": [
+          "amount"
+        ]
+      },
+      "WalletView": {
+        "type": "object",
+        "properties": {
+          "balance": {
+            "type": "number"
+          }
+        }
+      },
+      "NewHomeworkRequest": {
+        "type": "object",
+        "properties": {
+          "subject": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 0
+          },
+          "body": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 0
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "attachmentName": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "dueDate",
+          "subject",
+          "title"
+        ]
+      },
+      "Message": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "NewNoticeRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 140,
+            "minLength": 0
+          },
+          "body": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 0
+          },
+          "campus": {
+            "type": "string",
+            "enum": [
+              "PREP",
+              "COLLEGE",
+              "BOTH"
+            ]
+          },
+          "grades": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "teams": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "tag": {
+            "type": "string"
+          },
+          "attachmentName": {
+            "type": "string"
+          },
+          "requiresAck": {
+            "type": "boolean"
+          },
+          "rsvpEnabled": {
+            "type": "boolean"
+          },
+          "linkedCollectionId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "required": [
+          "body",
+          "campus",
+          "title"
+        ]
+      },
+      "SellRequest": {
+        "type": "object",
+        "properties": {
+          "learnerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 0
+          },
+          "price": {
+            "type": "number",
+            "minimum": 10
+          },
+          "priceNew": {
+            "type": "number"
+          },
+          "sizeType": {
+            "type": "string"
+          },
+          "size": {
+            "type": "string"
+          },
+          "sport": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "learnerId",
+          "name",
+          "price"
+        ]
+      },
+      "CatalogEntry": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "SUPPLY_LIST",
+              "UNIFORM",
+              "SPORT",
+              "PRELOVED",
+              "LABELS"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "perMonth": {
+            "type": "boolean"
+          },
+          "priceNew": {
+            "type": "number"
+          },
+          "size": {
+            "type": "string"
+          },
+          "badges": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "fits": {
+            "type": "boolean"
+          },
+          "mine": {
+            "type": "boolean"
+          },
+          "inCart": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CheckoutRequest": {
+        "type": "object",
+        "properties": {
+          "delivery": {
+            "type": "string",
+            "enum": [
+              "TO_SCHOOL",
+              "TO_HOME"
+            ]
+          },
+          "paymentMethod": {
+            "type": "string",
+            "enum": [
+              "WALLET",
+              "SAVINGS",
+              "CARD",
+              "PAY_IN_4"
+            ]
+          }
+        },
+        "required": [
+          "delivery",
+          "paymentMethod"
+        ]
+      },
+      "OrderLineView": {
+        "type": "object",
+        "properties": {
+          "learnerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "learnerName": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "SUPPLY_LIST",
+              "UNIFORM",
+              "SPORT",
+              "PRELOVED",
+              "LABELS"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "unitPrice": {
+            "type": "number"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      },
+      "OrderView": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "orderNumber": {
+            "type": "string"
+          },
+          "placedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "subtotal": {
+            "type": "number"
+          },
+          "deliveryFee": {
+            "type": "number"
+          },
+          "total": {
+            "type": "number"
+          },
+          "delivery": {
+            "type": "string",
+            "enum": [
+              "TO_SCHOOL",
+              "TO_HOME"
+            ]
+          },
+          "paymentMethod": {
+            "type": "string",
+            "enum": [
+              "WALLET",
+              "SAVINGS",
+              "CARD",
+              "PAY_IN_4"
+            ]
+          },
+          "schoolGiveBack": {
+            "type": "number"
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderLineView"
+            }
+          }
+        }
+      },
+      "AddToCartRequest": {
+        "type": "object",
+        "properties": {
+          "learnerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "key": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "key",
+          "learnerId"
+        ]
+      },
+      "CartLine": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "learnerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "learnerName": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "SUPPLY_LIST",
+              "UNIFORM",
+              "SPORT",
+              "PRELOVED",
+              "LABELS"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "unitPrice": {
+            "type": "number"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "lineTotal": {
+            "type": "number"
+          }
+        }
+      },
+      "CartView": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CartLine"
+            }
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "subtotal": {
+            "type": "number"
+          },
+          "homeDeliveryFee": {
+            "type": "number"
+          },
+          "freeHomeDeliveryFrom": {
+            "type": "number"
+          }
+        }
+      },
+      "AddSupplyListRequest": {
+        "type": "object",
+        "properties": {
+          "learnerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "alreadyHaveItemIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "learnerId"
+        ]
+      },
+      "StockRequest": {
+        "type": "object",
+        "properties": {
+          "itemName": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 0
+          },
+          "size": {
+            "type": "string",
+            "maxLength": 20,
+            "minLength": 0
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32",
+            "maximum": 100000,
+            "minimum": 0
+          }
+        },
+        "required": [
+          "itemName",
+          "size"
+        ]
+      },
+      "UniformItemRequest": {
+        "type": "object",
+        "properties": {
+          "campus": {
+            "type": "string",
+            "enum": [
+              "PREP",
+              "COLLEGE",
+              "BOTH"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 0
+          },
+          "price": {
+            "type": "number",
+            "minimum": 0.01
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "GENERIC",
+              "CRESTED"
+            ]
+          },
+          "sizeType": {
+            "type": "string",
+            "minLength": 1
+          },
+          "supplier": {
+            "type": "string",
+            "maxLength": 60,
+            "minLength": 0
+          }
+        },
+        "required": [
+          "campus",
+          "kind",
+          "name",
+          "price",
+          "sizeType"
+        ]
+      },
+      "UniformItemView": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "campus": {
+            "type": "string",
+            "enum": [
+              "PREP",
+              "COLLEGE",
+              "BOTH"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "GENERIC",
+              "CRESTED"
+            ]
+          },
+          "sizeType": {
+            "type": "string"
+          },
+          "supplier": {
+            "type": "string"
+          }
+        }
+      },
+      "SportOfferRequest": {
+        "type": "object",
+        "properties": {
+          "sport": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 0
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "BUY",
+              "RENT"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 0
+          },
+          "price": {
+            "type": "number",
+            "minimum": 0.01
+          }
+        },
+        "required": [
+          "name",
+          "price",
+          "sport",
+          "type"
+        ]
+      },
+      "SportOfferView": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "sport": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "BUY",
+              "RENT"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          }
+        }
+      },
+      "EnrolLearnerRequest": {
+        "type": "object",
+        "properties": {
+          "studentNumber": {
+            "type": "string",
+            "maxLength": 20,
+            "minLength": 0
+          },
+          "firstName": {
+            "type": "string",
+            "maxLength": 60,
+            "minLength": 0
+          },
+          "lastName": {
+            "type": "string",
+            "maxLength": 60,
+            "minLength": 0
+          },
+          "grade": {
+            "type": "string",
+            "minLength": 1
+          },
+          "campus": {
+            "type": "string",
+            "enum": [
+              "PREP",
+              "COLLEGE",
+              "BOTH"
+            ]
+          },
+          "house": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 0
+          },
+          "sports": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "campus",
+          "firstName",
+          "grade",
+          "lastName",
+          "studentNumber"
+        ]
+      },
+      "NewGroupRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 0
+          },
+          "campus": {
+            "type": "string",
+            "enum": [
+              "PREP",
+              "COLLEGE",
+              "BOTH"
+            ]
+          },
+          "grade": {
+            "type": "string"
+          },
+          "team": {
+            "type": "string"
+          },
+          "moderatorLabel": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 0
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "OPEN",
+              "ANNOUNCE"
+            ]
+          }
+        },
+        "required": [
+          "campus",
+          "mode",
+          "name"
+        ]
+      },
+      "LoadFeesRequest": {
+        "type": "object",
+        "properties": {
+          "campus": {
+            "type": "string",
+            "enum": [
+              "PREP",
+              "COLLEGE",
+              "BOTH"
+            ]
+          },
+          "grade": {
+            "type": "string",
+            "minLength": 1
+          },
+          "annualFee": {
+            "type": "number",
+            "maximum": 1000000,
+            "minimum": 1
+          }
+        },
+        "required": [
+          "annualFee",
+          "campus",
+          "grade"
+        ]
+      },
+      "NewCollectionRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 1
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "PAYMENT",
+              "TICKET",
+              "DONATION"
+            ]
+          },
+          "campus": {
+            "type": "string",
+            "enum": [
+              "PREP",
+              "COLLEGE",
+              "BOTH"
+            ]
+          },
+          "grades": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "instalments": {
+            "type": "integer",
+            "format": "int32",
+            "maximum": 12,
+            "minimum": 1
+          }
+        },
+        "required": [
+          "amount",
+          "campus",
+          "grades",
+          "kind",
+          "title"
+        ]
+      },
+      "CollectionStats": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "PAYMENT",
+              "TICKET",
+              "DONATION"
+            ]
+          },
+          "amount": {
+            "type": "number"
+          },
+          "campus": {
+            "type": "string",
+            "enum": [
+              "PREP",
+              "COLLEGE",
+              "BOTH"
+            ]
+          },
+          "grades": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "instalments": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "eligible": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "paid": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "percentPaid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "collected": {
+            "type": "number"
+          }
+        }
+      },
+      "ReminderResult": {
+        "type": "object",
+        "properties": {
+          "sentTo": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "TeacherAssignment": {
+        "type": "object",
+        "properties": {
+          "campus": {
+            "type": "string",
+            "enum": [
+              "PREP",
+              "COLLEGE",
+              "BOTH"
+            ]
+          },
+          "grade": {
+            "type": "string"
+          },
+          "className": {
+            "type": "string",
+            "maxLength": 10,
+            "minLength": 0
+          }
+        }
+      },
+      "RequestChanges": {
+        "type": "object",
+        "properties": {
+          "comment": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "comment"
+        ]
+      },
+      "HandoutRequest": {
+        "type": "object",
+        "properties": {
+          "lineIndexes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        }
+      },
+      "HandoutResult": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "order": {
+            "$ref": "#/components/schemas/PreOrderView"
+          }
+        }
+      },
+      "MenuItemRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 60,
+            "minLength": 0
+          },
+          "price": {
+            "type": "number",
+            "maximum": 1000,
+            "minimum": 0.01
+          },
+          "category": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 0
+          }
+        },
+        "required": [
+          "category",
+          "name",
+          "price"
+        ]
+      },
+      "MenuItemAdminView": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "category": {
+            "type": "string"
+          },
+          "available": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ChargeRequest": {
+        "type": "object",
+        "properties": {
+          "learnerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "cardToken": {
+            "type": "string"
+          },
+          "menuItemIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "menuItemIds"
+        ]
+      },
+      "ChargeResult": {
+        "type": "object",
+        "properties": {
+          "approved": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "total": {
+            "type": "number"
+          },
+          "walletBalance": {
+            "type": "number"
+          }
+        }
+      },
+      "PocketMoneyRequest": {
+        "type": "object",
+        "properties": {
+          "learnerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "amount": {
+            "type": "number",
+            "maximum": 2000,
+            "minimum": 1
+          },
+          "dayOfWeek": {
+            "type": "string",
+            "enum": [
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY",
+              "SATURDAY",
+              "SUNDAY"
+            ]
+          },
+          "enabled": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "amount",
+          "learnerId"
+        ]
+      },
+      "PocketMoneyView": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "learnerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "learnerName": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "dayOfWeek": {
+            "type": "string",
+            "enum": [
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY",
+              "SATURDAY",
+              "SUNDAY"
+            ]
+          },
+          "enabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PayRequest": {
+        "type": "object",
+        "properties": {
+          "learnerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "part": {
+            "type": "string",
+            "enum": [
+              "FULL",
+              "INSTALMENT"
+            ]
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32",
+            "maximum": 10,
+            "minimum": 1
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 10
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "WALLET",
+              "CARD"
+            ]
+          }
+        },
+        "required": [
+          "learnerId"
+        ]
+      },
+      "PaymentReceipt": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "amountPaid": {
+            "type": "number"
+          },
+          "ticketCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "RsvpRequest": {
+        "type": "object",
+        "properties": {
+          "attending": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "attending"
+        ]
+      },
+      "ChildAck": {
+        "type": "object",
+        "properties": {
+          "learnerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "acknowledged": {
+            "type": "boolean"
+          }
+        }
+      },
+      "NoticeView": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "from": {
+            "type": "string"
+          },
+          "tag": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "attachment": {
+            "type": "string"
+          },
+          "audience": {
+            "type": "string"
+          },
+          "publishedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "read": {
+            "type": "boolean"
+          },
+          "requiresAck": {
+            "type": "boolean"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChildAck"
+            }
+          },
+          "rsvpEnabled": {
+            "type": "boolean"
+          },
+          "myRsvp": {
+            "type": "boolean"
+          },
+          "linkedCollectionId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "AckRequest": {
+        "type": "object",
+        "properties": {
+          "learnerId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "required": [
+          "learnerId"
+        ]
+      },
+      "Goal": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "target": {
+            "type": "number"
+          },
+          "saved": {
+            "type": "number"
+          },
+          "percent": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "LearnerView": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "studentNumber": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "grade": {
+            "type": "string"
+          },
+          "campus": {
+            "type": "string",
+            "enum": [
+              "PREP",
+              "COLLEGE",
+              "BOTH"
+            ]
+          },
+          "school": {
+            "type": "string"
+          },
+          "house": {
+            "type": "string"
+          },
+          "sports": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "sizes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "walletBalance": {
+            "type": "number"
+          },
+          "dailyLimit": {
+            "type": "number"
+          },
+          "spentToday": {
+            "type": "number"
+          },
+          "frozen": {
+            "type": "boolean"
+          },
+          "tuckMode": {
+            "type": "string",
+            "enum": [
+              "PREORDER_ONLY",
+              "APPROVED_ITEMS",
+              "FREE_CHOICE"
+            ]
+          },
+          "blockedCategories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "allowedItems": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "goal": {
+            "$ref": "#/components/schemas/Goal"
+          }
+        }
+      },
+      "LearnerSignInRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 3
+          },
+          "password": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 8
+          }
+        },
+        "required": [
+          "password",
+          "username"
+        ]
+      },
+      "LearnerSignIn": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          }
+        }
+      },
+      "PostMessageRequest": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 0
+          }
+        },
+        "required": [
+          "body"
+        ]
+      },
+      "MessageView": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "author": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "sentAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "mine": {
+            "type": "boolean"
+          },
+          "scheduled": {
+            "type": "boolean"
+          },
+          "deliverAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "PostMessageResult": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "$ref": "#/components/schemas/MessageView"
+          },
+          "notice": {
+            "type": "string"
+          }
+        }
+      },
+      "GiveRequest": {
+        "type": "object",
+        "properties": {
+          "fromName": {
+            "type": "string",
+            "maxLength": 60,
+            "minLength": 0
+          },
+          "amount": {
+            "type": "number",
+            "maximum": 20000,
+            "minimum": 10
+          }
+        },
+        "required": [
+          "amount",
+          "fromName"
+        ]
+      },
+      "SwitchRoleRequest": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "PARENT",
+              "LEARNER",
+              "TEACHER",
+              "PRINCIPAL",
+              "SCHOOL_OFFICE",
+              "TUCKSHOP"
+            ]
+          }
+        },
+        "required": [
+          "role"
+        ]
+      },
+      "MeResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "username": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "activeRole": {
+            "$ref": "#/components/schemas/RoleView"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoleView"
+            }
+          }
+        }
+      },
+      "RoleView": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "PARENT",
+              "LEARNER",
+              "TEACHER",
+              "PRINCIPAL",
+              "SCHOOL_OFFICE",
+              "TUCKSHOP"
+            ]
+          },
+          "label": {
+            "type": "string"
+          },
+          "campus": {
+            "type": "string",
+            "enum": [
+              "PREP",
+              "COLLEGE",
+              "BOTH"
+            ]
+          },
+          "grade": {
+            "type": "string"
+          },
+          "className": {
+            "type": "string"
+          },
+          "learnerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "verified": {
+            "type": "boolean"
+          }
+        }
+      },
+      "TokenResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "me": {
+            "$ref": "#/components/schemas/MeResponse"
+          }
+        }
+      },
+      "LearnerDetails": {
+        "type": "object",
+        "properties": {
+          "studentNumber": {
+            "type": "string",
+            "maxLength": 20,
+            "minLength": 0
+          },
+          "firstName": {
+            "type": "string",
+            "maxLength": 60,
+            "minLength": 0
+          },
+          "lastName": {
+            "type": "string",
+            "maxLength": 60,
+            "minLength": 0
+          },
+          "grade": {
+            "type": "string",
+            "minLength": 1
+          },
+          "campus": {
+            "type": "string",
+            "enum": [
+              "PREP",
+              "COLLEGE",
+              "BOTH"
+            ]
+          }
+        },
+        "required": [
+          "campus",
+          "firstName",
+          "grade",
+          "lastName"
+        ]
+      },
+      "RegisterRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 3
+          },
+          "password": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 8
+          },
+          "fullName": {
+            "type": "string",
+            "minLength": 1
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "PARENT",
+              "LEARNER",
+              "TEACHER",
+              "PRINCIPAL",
+              "SCHOOL_OFFICE",
+              "TUCKSHOP"
+            ]
+          },
+          "ask": {
+            "type": "string"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LearnerDetails"
+            }
+          },
+          "learner": {
+            "$ref": "#/components/schemas/LearnerDetails"
+          },
+          "teaching": {
+            "$ref": "#/components/schemas/TeacherAssignment"
+          }
+        },
+        "required": [
+          "fullName",
+          "password",
+          "role",
+          "username"
+        ]
+      },
+      "RegisterResponse": {
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "minLength": 1
+          },
+          "password": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "password",
+          "username"
+        ]
+      },
+      "PriceRequest": {
+        "type": "object",
+        "properties": {
+          "price": {
+            "type": "number",
+            "minimum": 0.01
+          }
+        },
+        "required": [
+          "price"
+        ]
+      },
+      "SettingsUpdate": {
+        "type": "object",
+        "properties": {
+          "approveNotices": {
+            "type": "boolean"
+          },
+          "approveHomework": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SettingsView": {
+        "type": "object",
+        "properties": {
+          "approveNotices": {
+            "type": "boolean"
+          },
+          "approveHomework": {
+            "type": "boolean"
+          }
+        }
+      },
+      "MenuItemUpdate": {
+        "type": "object",
+        "properties": {
+          "price": {
+            "type": "number",
+            "maximum": 1000,
+            "minimum": 0.01
+          },
+          "category": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 0
+          },
+          "available": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PocketMoneyUpdate": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "maximum": 2000,
+            "minimum": 1
+          },
+          "dayOfWeek": {
+            "type": "string",
+            "enum": [
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY",
+              "SATURDAY",
+              "SUNDAY"
+            ]
+          },
+          "enabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ControlsRequest": {
+        "type": "object",
+        "properties": {
+          "dailyLimit": {
+            "type": "number",
+            "maximum": 1000,
+            "minimum": 0
+          },
+          "frozen": {
+            "type": "boolean"
+          },
+          "tuckMode": {
+            "type": "string",
+            "enum": [
+              "PREORDER_ONLY",
+              "APPROVED_ITEMS",
+              "FREE_CHOICE"
+            ]
+          },
+          "blockedCategories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "allowedItems": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          }
+        }
+      },
+      "TxView": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "who": {
+            "type": "string"
+          },
+          "learnerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "description": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string"
+          },
+          "at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "DayView": {
+        "type": "object",
+        "properties": {
+          "day": {
+            "type": "string",
+            "format": "date"
+          },
+          "today": {
+            "type": "boolean"
+          },
+          "order": {
+            "$ref": "#/components/schemas/PreOrderView"
+          }
+        }
+      },
+      "LearnerWeek": {
+        "type": "object",
+        "properties": {
+          "learnerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "walletBalance": {
+            "type": "number"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "PREORDER_ONLY",
+              "APPROVED_ITEMS",
+              "FREE_CHOICE"
+            ]
+          },
+          "days": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DayView"
+            }
+          }
+        }
+      },
+      "MenuItemView": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "category": {
+            "type": "string"
+          }
+        }
+      },
+      "HomeworkStats": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "grade": {
+            "type": "string"
+          },
+          "school": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "attachment": {
+            "type": "string"
+          },
+          "by": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "CHANGES_REQUESTED",
+              "PUBLISHED"
+            ]
+          },
+          "reviewComment": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "done": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "percentDone": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ClassView": {
+        "type": "object",
+        "properties": {
+          "teacher": {
+            "type": "string"
+          },
+          "grade": {
+            "type": "string"
+          },
+          "className": {
+            "type": "string"
+          },
+          "school": {
+            "type": "string"
+          },
+          "learners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RosterRow"
+            }
+          }
+        }
+      },
+      "RosterRow": {
+        "type": "object",
+        "properties": {
+          "learnerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "homeworkDone": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "homeworkSet": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "acknowledged": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ackNeeded": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "NoticeStats": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "from": {
+            "type": "string"
+          },
+          "tag": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "audience": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "CHANGES_REQUESTED",
+              "PUBLISHED"
+            ]
+          },
+          "reviewComment": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "publishedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "guardians": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "reads": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "readPercent": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "requiresAck": {
+            "type": "boolean"
+          },
+          "acks": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ackPercent": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "SupplyListLine": {
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "unitPrice": {
+            "type": "number"
+          },
+          "lineTotal": {
+            "type": "number"
+          }
+        }
+      },
+      "SupplyListView": {
+        "type": "object",
+        "properties": {
+          "learnerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "learnerName": {
+            "type": "string"
+          },
+          "grade": {
+            "type": "string"
+          },
+          "campus": {
+            "type": "string",
+            "enum": [
+              "PREP",
+              "COLLEGE",
+              "BOTH"
+            ]
+          },
+          "published": {
+            "type": "boolean"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SupplyListLine"
+            }
+          },
+          "fullListTotal": {
+            "type": "number"
+          },
+          "fullListDiscountPercent": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "inCart": {
+            "type": "boolean"
+          }
+        }
+      },
+      "StockLine": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "item": {
+            "type": "string"
+          },
+          "size": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "low": {
+            "type": "boolean"
+          },
+          "restockRequested": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UniformView": {
+        "type": "object",
+        "properties": {
+          "salesThisYear": {
+            "type": "number"
+          },
+          "lowSizes": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "stock": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StockLine"
+            }
+          }
+        }
+      },
+      "Payout": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "source": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "FeedItem": {
+        "type": "object",
+        "properties": {
+          "at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "description": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "payer": {
+            "type": "string"
+          }
+        }
+      },
+      "Overview": {
+        "type": "object",
+        "properties": {
+          "collected": {
+            "type": "number"
+          },
+          "learnersWithFeePlan": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "learnersTotal": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "feePlanPercent": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "giveBackThisYear": {
+            "type": "number"
+          },
+          "cashHandled": {
+            "type": "number"
+          },
+          "openCollections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CollectionStats"
+            }
+          },
+          "latestPayments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FeedItem"
+            }
+          }
+        }
+      },
+      "SupplyListDetail": {
+        "type": "object",
+        "properties": {
+          "campus": {
+            "type": "string",
+            "enum": [
+              "PREP",
+              "COLLEGE",
+              "BOTH"
+            ]
+          },
+          "grade": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ListItemRequest"
+            }
+          }
+        }
+      },
+      "ReportedMessage": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "groupId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "groupName": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "reports": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sentAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "FeePlanBreakdown": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "byPlan": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "withoutPlan": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "FeeSchedule": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "grades": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GradeFees"
+            }
+          }
+        }
+      },
+      "GradeFees": {
+        "type": "object",
+        "properties": {
+          "campus": {
+            "type": "string",
+            "enum": [
+              "PREP",
+              "COLLEGE",
+              "BOTH"
+            ]
+          },
+          "grade": {
+            "type": "string"
+          },
+          "learners": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "loaded": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "annualFee": {
+            "type": "number"
+          }
+        }
+      },
+      "StaffView": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "since": {
+            "type": "string"
+          }
+        }
+      },
+      "AccessRequestView": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "ask": {
+            "type": "string"
+          },
+          "how": {
+            "type": "string"
+          },
+          "requestedRole": {
+            "type": "string"
+          },
+          "requestedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "learners": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ApprovalItem": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "from": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "audience": {
+            "type": "string"
+          },
+          "submittedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Attention": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "area": {
+            "type": "string"
+          }
+        }
+      },
+      "PrincipalDashboard": {
+        "type": "object",
+        "properties": {
+          "feePlanPercent": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "collected": {
+            "type": "number"
+          },
+          "noticeReadPercent": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homeworkDonePercent": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "waitingForApproval": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApprovalItem"
+            }
+          },
+          "settings": {
+            "$ref": "#/components/schemas/SettingsView"
+          },
+          "attention": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Attention"
+            }
+          },
+          "tuckshopPreOrdersToday": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "tuckshopCollectedToday": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "tuckshopSalesToday": {
+            "type": "number"
+          },
+          "homework": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HomeworkStats"
+            }
+          },
+          "notices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NoticeStats"
+            }
+          }
+        }
+      },
+      "TillSummary": {
+        "type": "object",
+        "properties": {
+          "serviceDay": {
+            "type": "string",
+            "format": "date"
+          },
+          "preOrders": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "collectedInFull": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "salesToday": {
+            "type": "number"
+          },
+          "tillSalesToday": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "orders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PreOrderView"
+            }
+          }
+        }
+      },
+      "TillLearnerView": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "grade": {
+            "type": "string"
+          },
+          "school": {
+            "type": "string"
+          },
+          "walletBalance": {
+            "type": "number"
+          },
+          "leftToday": {
+            "type": "number"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "PREORDER_ONLY",
+              "APPROVED_ITEMS",
+              "FREE_CHOICE"
+            ]
+          },
+          "frozen": {
+            "type": "boolean"
+          },
+          "todaysOrder": {
+            "$ref": "#/components/schemas/PreOrderView"
+          }
+        }
+      },
+      "TicketView": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "collectionId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "CollectionForChild": {
+        "type": "object",
+        "properties": {
+          "collectionId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "learnerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "learnerName": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "PAYMENT",
+              "TICKET",
+              "DONATION"
+            ]
+          },
+          "amount": {
+            "type": "number"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "instalments": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paid": {
+            "type": "number"
+          },
+          "owing": {
+            "type": "number"
+          },
+          "ticketsBought": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "Headline": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "from": {
+            "type": "string"
+          },
+          "tag": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "publishedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CardView": {
+        "type": "object",
+        "properties": {
+          "learner": {
+            "$ref": "#/components/schemas/LearnerView"
+          },
+          "cardToken": {
+            "type": "string"
+          }
+        }
+      },
+      "ParentHome": {
+        "type": "object",
+        "properties": {
+          "greetingName": {
+            "type": "string"
+          },
+          "walletBalance": {
+            "type": "number"
+          },
+          "unreadNotices": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "readyCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "readiness": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReadinessItem"
+            }
+          }
+        }
+      },
+      "ReadinessItem": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "done": {
+            "type": "boolean"
+          },
+          "area": {
+            "type": "string"
+          },
+          "learnerId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "GivePage": {
+        "type": "object",
+        "properties": {
+          "forFamily": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearer-jwt": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

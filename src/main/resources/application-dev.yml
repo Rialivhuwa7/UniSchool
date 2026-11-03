@@ -1,0 +1,22 @@
+# Local development: H2 database saved in ./data/unischool.mv.db, so what you enter survives a
+# restart. The schema comes from the same Flyway migrations as staging and production, and the
+# demo school from the prototype is loaded once, when the database is empty.
+# Start again from the demo data: stop the app and delete the ./data folder.
+spring:
+  datasource:
+    # MODE=PostgreSQL and friends make H2 behave like production's PostgreSQL.
+    # AUTO_SERVER lets the IntelliJ database window open the file while the app runs.
+    url: jdbc:h2:file:./data/unischool;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH;AUTO_SERVER=TRUE
+    username: sa
+    password: ""
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+unischool:
+  seed-demo: true
+  # Sign up as any role and sign in straight away, without the school office approving.
+  auto-approve-signups: true
+  jwt:
+    secret: ${UNISCHOOL_JWT_SECRET:dev-only-secret-change-me-0123456789abcdef}

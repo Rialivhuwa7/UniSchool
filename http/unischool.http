@@ -1,0 +1,85 @@
+### UniSchool API: try it from IntelliJ (open this file and click the green arrows).
+### Start the app first (run UniSchool). Every demo password is "unischool".
+
+### 1. Sign in as Naledi (parent of Lerato and Thabo)
+POST http://localhost:8081/api/auth/login
+Content-Type: application/json
+
+{"username": "naledi", "password": "unischool"}
+
+> {% client.global.set("token", response.body.token); %}
+
+### Home screen: wallet, unread notices, "ready for next year" checklist
+GET http://localhost:8081/api/home
+Authorization: Bearer {{token}}
+
+### Children with wallets and card controls
+GET http://localhost:8081/api/learners
+Authorization: Bearer {{token}}
+
+### Freeze Thabo's card and raise his daily limit (use Thabo's id from the list above)
+PATCH http://localhost:8081/api/learners/3/controls
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"frozen": true, "dailyLimit": 100}
+
+### Tuckshop week for both children
+GET http://localhost:8081/api/tuckshop/week
+Authorization: Bearer {{token}}
+
+### Shop: uniform for Lerato, tailored to her sizes
+GET http://localhost:8081/api/shop/catalog?learnerId=2&category=UNIFORM
+Authorization: Bearer {{token}}
+
+### Notices for the children
+GET http://localhost:8081/api/notices
+Authorization: Bearer {{token}}
+
+### Trips, events and levies
+GET http://localhost:8081/api/payments/collections
+Authorization: Bearer {{token}}
+
+### 2. Tuckshop till: sign in as Grace
+POST http://localhost:8081/api/auth/login
+Content-Type: application/json
+
+{"username": "sithole", "password": "unischool"}
+
+> {% client.global.set("till", response.body.token); %}
+
+### Today's pre-orders and sales
+GET http://localhost:8081/api/pos/today
+Authorization: Bearer {{till}}
+
+### Try to sell Lerato a muffin (declined: she's on pre-orders only)
+POST http://localhost:8081/api/pos/charge
+Authorization: Bearer {{till}}
+Content-Type: application/json
+
+{"learnerId": 2, "menuItemIds": [9]}
+
+### 3. Principal: sign in as Thandeka
+POST http://localhost:8081/api/auth/login
+Content-Type: application/json
+
+{"username": "khumalo", "password": "unischool"}
+
+> {% client.global.set("principal", response.body.token); %}
+
+### School at a glance, with drafts waiting for approval
+GET http://localhost:8081/api/principal/dashboard
+Authorization: Bearer {{principal}}
+
+### Switch to the school-office role on the same account
+POST http://localhost:8081/api/auth/switch-role
+Authorization: Bearer {{principal}}
+Content-Type: application/json
+
+{"role": "SCHOOL_OFFICE"}
+
+> {% client.global.set("office", response.body.token); %}
+
+### School office overview
+GET http://localhost:8081/api/school/overview
+Authorization: Bearer {{office}}

@@ -1,0 +1,45 @@
+# Settings shared by every environment. Each profile file adds or overrides:
+#   dev      local machine: H2 in memory + demo data (the default)
+#   staging  PostgreSQL, Flyway migrations, demo data optional
+#   prod     PostgreSQL, Flyway migrations, no demo data
+# Choose one with SPRING_PROFILES_ACTIVE=staging (or prod).
+spring:
+  application:
+    name: UniSchool
+  profiles:
+    default: dev
+  jpa:
+    open-in-view: false
+    show-sql: false
+    hibernate:
+      # The schema is owned by Flyway (src/main/resources/db/migration).
+      # Hibernate only checks that the entities match it.
+      ddl-auto: validate
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  sql:
+    init:
+      mode: never   # demo data comes from DemoDataSeeder, not data.sql
+  h2:
+    console:
+      enabled: false
+
+server:
+  port: ${PORT:8081}
+
+unischool:
+  timezone: Africa/Johannesburg
+  seed-demo: false
+  demo-password: unischool
+  # Approve every sign-up straight away, for local testing only. Never on staging or prod.
+  auto-approve-signups: false
+  # The first school office account, created at start-up when the database has none (see FirstAdminBootstrap).
+  admin:
+    username: ${UNISCHOOL_ADMIN_USERNAME:}
+    password: ${UNISCHOOL_ADMIN_PASSWORD:}
+    full-name: ${UNISCHOOL_ADMIN_NAME:School office}
+  jwt:
+    # HMAC key for signing JWTs, at least 32 characters. Required outside dev.
+    secret: ${UNISCHOOL_JWT_SECRET}
+    ttl-minutes: 480

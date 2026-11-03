@@ -1,0 +1,21 @@
+# Staging: managed PostgreSQL, schema from Flyway. It starts empty, like production: staff and
+# parents create the data by using the app. Connection details and secrets come from
+# environment variables so no passwords live in the repo:
+#   DB_URL       e.g. jdbc:postgresql://staging-db.example.com:5432/unischool
+#   DB_USERNAME
+#   DB_PASSWORD
+#   UNISCHOOL_JWT_SECRET          (32+ characters)
+#   UNISCHOOL_ADMIN_USERNAME, UNISCHOOL_ADMIN_PASSWORD (12+ characters), UNISCHOOL_ADMIN_NAME
+#                                 the first school office account, created on the first start
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 10
+
+unischool:
+  # The demo school is for local testing. Only set UNISCHOOL_SEED_DEMO=true on a throwaway
+  # staging database; it loads only into an empty one.
+  seed-demo: ${UNISCHOOL_SEED_DEMO:false}

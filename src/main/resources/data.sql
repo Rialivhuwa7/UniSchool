@@ -1,0 +1,1 @@
+-- No longer used: demo data is loaded by co.za.unicard.seed.DemoDataSeeder. Safe to delete.

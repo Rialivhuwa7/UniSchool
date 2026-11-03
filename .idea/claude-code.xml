@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ClaudeCodeSettings">
+    <option name="claudePath" value="C:\Users\BIGSAM TECH\.local\bin\claude.exe" />
+    <option name="alwaysAllowTools" value="Bash,Read,PowerShell,Write,Edit" />
+  </component>
+</project>
