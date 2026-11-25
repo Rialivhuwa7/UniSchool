@@ -45,7 +45,7 @@ Dev data is saved in `data/unischool.mv.db` and survives restarts. To start agai
 Needs Node.js 22 or newer. Start the backend first, then from the repository root:
 ```bash
 npm install              # once; installs the web app and the shared API package
-npm run dev              # http://localhost:5173 (Vite forwards /api to the backend on :8081)
+npm run dev              # http://localhost:5174 (Vite forwards /api to the backend on :8081)
 ```
 Sign in with one of the demo accounts listed under **Demo accounts** below (local dev only).
 
@@ -54,6 +54,33 @@ npm test                         # unit tests (shared package and web app, Vites
 npm run e2e --workspace web      # browser tests (Playwright); needs the backend running
 npm run build                    # production build in web/dist
 ```
+
+### On your phone
+
+The web app works like an app on a phone: a bottom tab bar, everything else under **More**, and
+it can be added to the home screen. With the backend running, `npm run dev` prints two addresses:
+```
+  ➜  Local:   http://localhost:5174/
+  ➜  Network: http://192.168.1.102:5174/
+```
+Under them it prints a QR code of the Network address: point the phone's camera at it and tap the
+link, or type the address in. The phone must be on the same Wi-Fi (allow Node.js through the Windows firewall if asked).
+To put it on the home screen: Safari **Share → Add to Home Screen** on iPhone, Chrome **⋮ → Add to
+Home screen** on Android. A full Android install (own window, app drawer) needs HTTPS, which you get
+once it's deployed.
+
+### Sharing it with someone outside your Wi-Fi (Tailscale)
+
+[Tailscale](https://tailscale.com) gives this computer a private HTTPS address that only people
+you invite can open, from anywhere. They always see your latest changes, as long as this computer,
+the backend and `npm run dev` (fixed on port 5174) are running.
+
+- One-time on this computer: install Tailscale, sign in, enable **HTTPS Certificates** at
+  https://login.tailscale.com/admin/dns, then run `tailscale serve --bg 5174`. It survives restarts.
+- To invite someone: https://login.tailscale.com/admin/machines → this computer → **⋯ → Share** →
+  their email. They install the Tailscale app, sign in with that email and accept.
+- They open `https://<computer>.<tailnet>.ts.net` (shown by `tailscale serve status`) and can add
+  it to their home screen. Stop sharing with `tailscale serve --https=443 off`.
 
 ### Keeping the front ends in step with the Java code
 

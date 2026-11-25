@@ -4,6 +4,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { formatRand, ok } from '@unischool/api';
 import { api } from '../lib/api';
 import { Alert, Button, ErrorAlert, Field, Input, QueryView } from '../components/ui';
+import { Brand } from '../components/Brand';
 
 /**
  * Public page behind a parent's share link (/give/<token>). Family and friends add to the
@@ -28,9 +29,7 @@ export function Give() {
     <div className="grid min-h-screen place-items-center px-5 py-10">
       <div className="w-full max-w-md space-y-6">
         <div className="text-center">
-          <b className="text-4xl font-extrabold tracking-tight">
-            Uni<i className="not-italic text-blue">School</i>
-          </b>
+          <Brand size="lg" />
         </div>
         <div className="space-y-4 rounded-2xl border border-line bg-surface p-6">
           <QueryView query={page}>

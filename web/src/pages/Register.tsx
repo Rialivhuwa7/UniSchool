@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { CAMPUS_LABEL, gradesFor, ok, ROLE_LABEL, type Role, type Schemas } from '@unischool/api';
 import { api } from '../lib/api';
 import { Alert, Button, ErrorAlert, Field, Input, Select } from '../components/ui';
+import { Brand } from '../components/Brand';
 
 type Learner = Schemas['LearnerDetails'];
 type School = 'PREP' | 'COLLEGE';
@@ -60,9 +61,7 @@ export function Register() {
     <div className="grid min-h-screen place-items-center px-5 py-10">
       <div className="w-full max-w-xl space-y-6">
         <div className="text-center">
-          <b className="text-4xl font-extrabold tracking-tight">
-            Uni<i className="not-italic text-blue">School</i>
-          </b>
+          <Brand size="lg" />
         </div>
         {done ? (
           <div className="space-y-4 rounded-2xl border border-line bg-surface p-6">

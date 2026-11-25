@@ -3,6 +3,7 @@ import { Link, Navigate, useNavigate } from 'react-router';
 import { useAuth } from '../lib/auth';
 import { homeOf } from '../roles';
 import { Button, ErrorAlert, Field, Input } from '../components/ui';
+import { Brand } from '../components/Brand';
 
 export function Login() {
   const { me, login } = useAuth();
@@ -32,9 +33,7 @@ export function Login() {
     <div className="grid min-h-screen place-items-center px-5 py-10">
       <div className="w-full max-w-md space-y-6">
         <div className="text-center">
-          <b className="text-4xl font-extrabold tracking-tight">
-            Uni<i className="not-italic text-blue">School</i>
-          </b>
+          <Brand size="lg" />
           <p className="mt-1 text-ink-2">One app for everything school.</p>
         </div>
 

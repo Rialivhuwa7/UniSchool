@@ -19,7 +19,7 @@ export function Page({ title, intro, actions, children }: { title: string; intro
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-3xl font-extrabold">{title}</h1>
+          <h1 className="text-2xl font-extrabold md:text-3xl">{title}</h1>
           {intro && <p className="mt-1 text-ink-2">{intro}</p>}
         </div>
         {actions && <div className="flex flex-wrap gap-2">{actions}</div>}
@@ -78,7 +78,8 @@ export function Button({
   );
 }
 
-const control = 'w-full rounded-xl border border-line bg-surface px-3 py-2 text-ink placeholder:text-ink-3 focus:border-blue focus:outline-none';
+// 16px text on phones: iOS zooms the page into any smaller field when it's tapped.
+const control = 'w-full rounded-xl border border-line bg-surface px-3 py-2.5 text-base text-ink md:py-2 md:text-[15px] placeholder:text-ink-3 focus:border-blue focus:outline-none';
 
 /** Label + control + hint/error. Pass the control as a render function to get the id wired up. */
 export function Field({ label, hint, error, children }: { label: string; hint?: ReactNode; error?: string; children: (id: string) => ReactNode }) {
@@ -172,31 +173,53 @@ export function Table<T>({
   empty?: string;
 }) {
   if (rows.length === 0) return <Empty>{empty}</Empty>;
+  const [first, ...rest] = columns;
   return (
-    <div className="-mx-5 overflow-x-auto">
-      <table className="w-full text-left text-sm">
-        <thead>
-          <tr className="border-b border-line text-ink-2">
-            {columns.map((c) => (
-              <th key={c.header} className={cx('px-5 py-2 font-semibold', c.className)}>
-                {c.header}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row) => (
-            <tr key={rowKey(row)} className="border-b border-line last:border-0">
-              {columns.map((c) => (
-                <td key={c.header} className={cx('px-5 py-3 align-top', c.className)}>
-                  {c.cell(row)}
-                </td>
+    <>
+      {/* Phone: each row is a card. The first column is its heading, the others are labelled lines. */}
+      <ul className="-mx-5 divide-y divide-line md:hidden">
+        {rows.map((row) => (
+          <li key={rowKey(row)} className="space-y-2 px-5 py-4 text-sm">
+            <div>{first.cell(row)}</div>
+            {rest.map((c, i) =>
+              c.header ? (
+                <div key={i} className="flex items-start justify-between gap-4">
+                  <span className="shrink-0 text-ink-3">{c.header}</span>
+                  <div className="min-w-0 text-right">{c.cell(row)}</div>
+                </div>
+              ) : (
+                <div key={i}>{c.cell(row)}</div>
+              ),
+            )}
+          </li>
+        ))}
+      </ul>
+
+      <div className="-mx-5 hidden overflow-x-auto md:block">
+        <table className="w-full text-left text-sm">
+          <thead>
+            <tr className="border-b border-line text-ink-2">
+              {columns.map((c, i) => (
+                <th key={i} className={cx('px-5 py-2 font-semibold', c.className)}>
+                  {c.header}
+                </th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr key={rowKey(row)} className="border-b border-line last:border-0">
+                {columns.map((c, i) => (
+                  <td key={i} className={cx('px-5 py-3 align-top', c.className)}>
+                    {c.cell(row)}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }
 
